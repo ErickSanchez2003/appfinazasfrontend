@@ -1,7 +1,11 @@
 import axios from "axios"
 
+// URL base de la API (backend)
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"
+
+// Crear instancia de axios
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  baseURL: API_URL, // ✅ SOLO esto, Vercel ya maneja el dominio
 })
 
 // Interceptor para agregar token a todas las peticiones
@@ -13,9 +17,7 @@ api.interceptors.request.use(
     }
     return config
   },
-  (error) => {
-    return Promise.reject(error)
-  },
+  (error) => Promise.reject(error)
 )
 
 // Interceptor para manejar errores de autenticación
@@ -27,7 +29,7 @@ api.interceptors.response.use(
       window.location.href = "/login"
     }
     return Promise.reject(error)
-  },
+  }
 )
 
 export default api
