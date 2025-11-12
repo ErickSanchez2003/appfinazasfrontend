@@ -1,7 +1,7 @@
 import axios from "axios"
 
 // URL base de la API (backend)
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"
+const API_URL = import.meta.env.VITE_API_URL || "https://finanzas-appbackend.vercel.app/api"
 
 // Crear instancia de axios
 const api = axios.create({
